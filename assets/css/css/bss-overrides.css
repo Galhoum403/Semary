@@ -1,0 +1,26 @@
+.px-1 {
+  padding-right: .25rem!important;
+  padding-left: .25rem!important;
+}
+
+.py-3 {
+  padding-top: 1rem!important;
+  padding-bottom: 1rem!important;
+}
+
+.pt-0 {
+  padding-top: 0!important;
+}
+
+.pe-10 {
+  padding-right: 10.5rem !important;
+}
+
+.pb-0 {
+  padding-bottom: 0!important;
+}
+
+.ps-0 {
+  padding-left: 0!important;
+}
+

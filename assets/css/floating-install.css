@@ -1,0 +1,28 @@
+/* ==== زر تثبيت التطبيق فقط ==== */
+
+#installAppBtn {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ffc107, #ffde59);
+  border-radius: 50%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  z-index: 9999;
+}
+
+#installAppBtn:hover {
+  transform: scale(1.1);
+}
+
+#installAppBtn i {
+  color: #fff;
+  font-size: 26px;
+}
+
