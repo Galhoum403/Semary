@@ -103,6 +103,9 @@
         <loc>https://semarysteel.netlify.app/calc.html</loc>
     </url>
     <url>
+        <loc>https://semarysteel.netlify.app/calc_old.html</loc>
+    </url>
+    <url>
         <loc>https://semarysteel.netlify.app/contact.html</loc>
     </url>
     <url>
@@ -110,5 +113,11 @@
     </url>
     <url>
         <loc>https://semarysteel.netlify.app/metal.html</loc>
+    </url>
+    <url>
+        <loc>https://semarysteel.netlify.app/metalcom2.html</loc>
+    </url>
+    <url>
+        <loc>https://semarysteel.netlify.app/thanks.html</loc>
     </url>
 </urlset>
