@@ -1,9 +1,0 @@
-# منع عرض صفحات الخطأ الخاصة بالاستضافة
-ErrorDocument 403 /404.html
-ErrorDocument 404 /404.html
-
-# منع الوصول المباشر لملفات حساسة
-<FilesMatch "\.(htaccess|htpasswd|ini|log|conf)$">
-  Order Allow,Deny
-  Deny from all
-</FilesMatch>

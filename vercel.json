@@ -1,0 +1,14 @@
+{
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/Semary_Catalog.pdf",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
+}
