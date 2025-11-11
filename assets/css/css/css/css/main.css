@@ -58,6 +58,8 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 a {
