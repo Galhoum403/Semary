@@ -18,7 +18,7 @@
         {
           "type": "header",
           "key": "referer",
-          "value": "^(?!https://semarysteel.vercel.app).*"
+          "value": "^(?!https://semarysteel.com).*"
         }
       ],
       "destination": "/no-access.jpg",
