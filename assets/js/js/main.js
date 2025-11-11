@@ -123,5 +123,8 @@
   const glightbox = GLightbox({
     selector: '.glightbox'
   });
+document.addEventListener("contextmenu", function(e){
+    e.preventDefault();
+});
 
 })();

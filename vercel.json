@@ -13,7 +13,7 @@
   ],
   "redirects": [
     {
-      "source": "/images/(.*)",
+      "source": "/assets/img(.*)",
       "has": [
         {
           "type": "header",
