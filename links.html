@@ -123,10 +123,44 @@ h1{margin:22px 0 10px;font-size:28px;font-weight:900;color:#202020;}
   background:#ffeec0;
   transform:scale(1.05);
 }
+  /* 🔘 زر عائم على الشمال */
+  .home-btn{
+    position:fixed;
+    left:18px;
+    top:50%;
+    transform:translateY(-50%);
+    width:58px;
+    height:58px;
+    background:#ffffff;
+    border-radius:50%;
+    box-shadow:0 6px 18px rgba(0,0,0,0.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    border:1px solid rgba(0,0,0,0.06);
+    transition:0.25s ease;
+    z-index:9999;
+  }
+  .home-btn:hover{
+    transform:translateY(-50%) scale(1.08);
+    box-shadow:0 10px 28px rgba(0,0,0,0.22);
+  }
+  .home-btn svg{
+    width:30px;
+    height:30px;
+    color:#d9a441;
+  }
 </style>
 </head>
 
 <body>
+<a href="https://semarysteel.com" class="home-btn" title="الصفحة الرئيسية">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 10.5 12 3l9 7.5"/>
+    <path d="M5 10v10h14V10"/>
+  </svg>
+</a>
 <div class="card">
   <img src="assets/img/Logo.png" class="avatar" />
   <h1>السمري ستيل</h1>
@@ -142,10 +176,10 @@ h1{margin:22px 0 10px;font-size:28px;font-weight:900;color:#202020;}
 
 <script>
 const socials=[
-  {p:'facebook',t:'Facebook',u:'https://www.facebook.com/Elsemarysteel'},
-  {p:'instagram',t:'Instagram',u:'https://www.instagram.com/elsemarysteel/'},
-  {p:'tiktok',t:'TikTok',u:'tiktok.com/@elsemary.steel'},
-  {p:'youtube',t:'YouTube',u:'youtube.com/@Elsemarysteel'}
+  {p:'facebook',t:'Facebook',u:'https://facebook.com/your'},
+  {p:'instagram',t:'Instagram',u:'https://instagram.com/your'},
+  {p:'tiktok',t:'TikTok',u:'https://tiktok.com/@your'},
+  {p:'youtube',t:'YouTube',u:'https://youtube.com/your'}
 ];
 
 function icon(p){
