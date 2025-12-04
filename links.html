@@ -1,216 +1,470 @@
-<!-- 🌤️ تصميم جديد كليًا — Light Luxury Gradient + Soft Gold + Clean UI -->
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>السمري ستيل</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>السمري ستيل | Elsemary Steel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ✨ ستايل جديد — فاتح، رايق، ذهبي ناعم، احترافي جدًا */
-
-:root{
-  --gold:#d9a441;
-  --gold-soft:#f5e2b5;
-  --white:#ffffff;
-  --text:#1a1a1a;
-  --muted:#6f6f6f;
-  --shadow:0 10px 35px rgba(0,0,0,0.12);
-  --bg:linear-gradient(160deg,#fffdf8 0%,#fff5d9 35%,#ffffff 75%,#f0f2f5 100%);
+/* ------------------------------------------------------------
+   1. Global Variables & Reset
+------------------------------------------------------------ */
+:root {
+  --gold: #d4a036;
+  --gold-dark: #b88625;
+  --gold-light: #fdf5e0;
+  --text-main: #2b2b2b;
+  --text-muted: #666;
+  --white: #ffffff;
+  --bg-gradient: linear-gradient(135deg, #fcfaf5 0%, #fff 100%);
+  --shadow-card: 0 20px 40px rgba(0,0,0,0.08);
+  --shadow-float: 0 10px 25px rgba(212, 160, 54, 0.2);
+  --radius-xl: 32px;
+  --radius-md: 16px;
+  --anim: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-body{
-  margin:0;
-  background:var(--bg);
-  font-family:'Segoe UI', sans-serif;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding:45px 18px;
-  color:var(--text);
+* { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-.card{
-  width:100%; max-width:700px;
-  background:var(--white);
-  border-radius:32px;
-  padding:48px 38px;
-  text-align:center;
-  box-shadow:var(--shadow);
-  border:1px solid rgba(0,0,0,0.05);
-  position:relative;
+/* زر العودة للرئيسية */
+.home-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  color: var(--gold);
+  z-index: 1000;
+  transition: var(--anim);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+.home-btn:hover { transform: scale(1.1); color: var(--gold-dark); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.home-btn svg { width: 24px; height: 24px; stroke-width: 2.5; }
+
+/* ------------------------------------------------------------
+   2. Main Layout Container
+------------------------------------------------------------ */
+.main-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px 240px; /* Padding bottom for footer space */
+  gap: 40px;
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-/* هالة ذهبية ناعمة خلف avatar */
-.card::before{
-  content:"";
-  position:absolute;
-  top:-90px; left:50%; transform:translateX(-50%);
-  width:260px; height:260px;
-  background:radial-gradient(circle, rgba(217,164,65,0.32), transparent 70%);
-  filter:blur(40px);
-  z-index:-1;
+/* ------------------------------------------------------------
+   3. Sales Panel (Sidebar)
+------------------------------------------------------------ */
+/* الكونتينر الجانبي */
+.sales-panel {
+  position: sticky;
+  top: 40px;
+  width: 90px; /* العرض المصغر */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-xl);
+  padding: 20px 10px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(212, 160, 54, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  z-index: 100;
+  height: fit-content;
 }
 
-.avatar{
-  width:150px; height:150px;
-  border-radius:50%;
-  padding:14px;
-  background:#fff;
-  box-shadow:0 8px 22px rgba(0,0,0,0.15);
-  margin:auto;
-  display:block;
+/* عند المرور بالماوس (Expand) */
+.sales-panel:hover {
+  width: 280px; /* توسيع العرض */
+  padding: 20px;
 }
 
-h1{margin:22px 0 10px;font-size:28px;font-weight:900;color:#202020;}
-.bio{color:var(--muted);font-size:16px;margin-bottom:40px;}
+.sales-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gold-dark);
+  text-align: center;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  opacity: 0; 
+  transition: 0.2s;
+  height: 0; overflow: hidden;
+}
+.sales-panel:hover .sales-title { opacity: 1; height: auto; margin-bottom: 15px; }
 
-/* 🔥 أزرار سوشيال — فاتحة، راقية، Gold Accent */
-.social-list{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  margin-top:10px;
+/* عنصر المبيعات الواحد */
+.sales-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  background: transparent;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  transition: var(--anim);
+  position: relative;
 }
 
-.s-btn{
-  width:100%;
-  padding:20px 24px;
-  border-radius:20px;
-  background:var(--white);
-  border:1px solid rgba(0,0,0,0.08);
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  font-size:19px;
-  font-weight:700;
-  color:var(--text);
-  box-shadow:0 4px 14px rgba(0,0,0,0.07);
-  transition:0.22s;
+.sales-item:hover {
+  background: var(--gold-light);
+  transform: translateX(-5px); /* حركة بسيطة للداخل */
 }
 
-.s-btn svg{width:28px;height:28px;color:var(--gold);}  
+/* الصورة - طلبك: صور كبيرة */
+.sales-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+.sales-avatar {
+  width: 65px; /* تكبير الصورة */
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--white);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: var(--anim);
+}
+.sales-item:hover .sales-avatar { transform: scale(1.05); border-color: var(--gold); }
 
-.s-btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 16px 30px rgba(0,0,0,0.14);
-  border-color:var(--gold);
-  background:linear-gradient(135deg,#fff 0%,#fff9ea 100%);
+/* أيقونة واتساب صغيرة فوق الصورة */
+.wa-badge {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 22px; height: 22px;
+  background: #25D366;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px;
 }
 
-.meta{
-  margin-top:35px;
-  font-size:14px;
-  color:#555;
-  display:flex;
-  justify-content:center;
-  gap:16px;
+/* النصوص (مخفية في الوضع المصغر) */
+.sales-info {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.2s 0.1s; /* تأخير بسيط */
+  white-space: nowrap;
+}
+.sales-panel:hover .sales-info { opacity: 1; }
+
+.sales-name { font-weight: 700; color: var(--text-main); font-size: 16px; margin-bottom: 2px; }
+.sales-phone { font-size: 13px; color: var(--text-muted); font-family: sans-serif; dir: ltr; }
+
+/* ------------------------------------------------------------
+   4. The Main Card
+------------------------------------------------------------ */
+.profile-card {
+  flex: 0 1 700px;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.02);
 }
 
-.share{
-  cursor:pointer;
-  background:#fff7df;
-  padding:8px 18px;
-  border-radius:12px;
-  font-weight:600;
-  border:1px solid var(--gold);
-  transition:0.25s;
+/* خلفية جمالية علوية */
+.profile-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 180px;
+  background: linear-gradient(180deg, rgba(212,160,54,0.1) 0%, transparent 100%);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  pointer-events: none;
 }
 
-.share:hover{
-  background:#ffeec0;
-  transform:scale(1.05);
+.main-avatar {
+  width: 160px;
+  height: 160px;
+  background: var(--white);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  margin: 0 auto 25px;
+  position: relative;
+  z-index: 2;
 }
-  /* 🔘 زر عائم على الشمال */
-  .home-btn{
-    position:fixed;
-    left:18px;
-    top:50%;
-    transform:translateY(-50%);
-    width:58px;
-    height:58px;
-    background:#ffffff;
-    border-radius:50%;
-    box-shadow:0 6px 18px rgba(0,0,0,0.15);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    border:1px solid rgba(0,0,0,0.06);
-    transition:0.25s ease;
-    z-index:9999;
+.main-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: contain; }
+
+h1 { margin: 0 0 10px; font-size: 32px; font-weight: 900; color: var(--text-main); letter-spacing: -0.5px; }
+.bio { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; line-height: 1.6; max-width: 80%; margin-left: auto; margin-right: auto; }
+
+/* قائمة السوشيال */
+.social-grid {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.s-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px;
+  background: var(--white);
+  border: 2px solid #f0f0f0;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: var(--anim);
+  position: relative;
+  overflow: hidden;
+}
+
+.s-btn svg { width: 28px; height: 28px; transition: var(--anim); }
+
+/* ألوان خاصة عند الهوفر */
+.s-btn:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 160, 54, 0.15); }
+.s-btn[data-platform="facebook"]:hover svg { color: #1877F2; }
+.s-btn[data-platform="instagram"]:hover svg { color: #E4405F; }
+.s-btn[data-platform="tiktok"]:hover svg { color: #000000; }
+.s-btn[data-platform="youtube"]:hover svg { color: #FF0000; }
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 15px;
+  color: #888;
+  margin-top: 30px;
+}
+.share-btn {
+  background: var(--gold-light);
+  color: var(--gold-dark);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--anim);
+}
+.share-btn:hover { background: var(--gold); color: #fff; }
+
+/* ------------------------------------------------------------
+   5. Sticky Map Footer
+------------------------------------------------------------ */
+.map-footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 180px;
+  background: #fff;
+  border-top: 4px solid var(--gold);
+  z-index: 999;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+}
+.map-frame { width: 100%; height: 100%; border: none; }
+
+/* ------------------------------------------------------------
+   6. RESPONSIVE DESIGN (تجاوب الموبايل)
+------------------------------------------------------------ */
+@media (max-width: 992px) {
+  .main-container {
+    flex-direction: column;
+    padding: 20px 15px 200px;
+    align-items: center;
+    gap: 25px;
   }
-  .home-btn:hover{
-    transform:translateY(-50%) scale(1.08);
-    box-shadow:0 10px 28px rgba(0,0,0,0.22);
+  
+  /* تحويل قائمة المبيعات لشريط أفقي بالأعلى */
+  .sales-panel {
+    position: relative;
+    top: 0;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 15px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* إخفاء شريط التمرير */
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    border-bottom: 2px solid var(--gold-light);
+    background: #fff;
   }
-  .home-btn svg{
-    width:30px;
-    height:30px;
-    color:#d9a441;
+  .sales-panel::-webkit-scrollbar { display: none; }
+  
+  .sales-panel:hover { width: 100%; padding: 15px; } /* إلغاء توسيع العرض للموبايل */
+  .sales-title { display: none; } /* إخفاء العنوان لتوفير مساحة */
+  
+  .sales-item {
+    flex-direction: column; /* الصورة فوق الاسم */
+    min-width: 100px;
+    text-align: center;
+    padding: 5px;
+    gap: 8px;
   }
+  .sales-item:hover { transform: translateY(-3px); }
+  
+  .sales-avatar { width: 75px; height: 75px; } /* صور كبيرة جداً وواضحة للموبايل */
+  
+  .sales-info {
+    opacity: 1; /* إظهار الاسم دائماً على الموبايل */
+    align-items: center;
+  }
+  .sales-name { font-size: 14px; white-space: normal; line-height: 1.2; }
+  .sales-phone { font-size: 11px; }
+
+  /* الكارت الرئيسي */
+  .profile-card {
+    width: 100%;
+    padding: 40px 20px;
+  }
+  h1 { font-size: 26px; }
+  .bio { width: 100%; font-size: 16px; margin-bottom: 30px; }
+  .s-btn { padding: 15px; font-size: 16px; }
+}
+
+@media (max-width: 480px) {
+  /* تعديلات للشاشات الصغيرة جداً */
+  .sales-avatar { width: 68px; height: 68px; }
+  .map-footer { height: 160px; }
+  body { padding-bottom: 160px; } /* التأكد من أن الخريطة لا تغطي المحتوى */
+}
 </style>
 </head>
 
 <body>
-<a href="https://semarysteel.com" class="home-btn" title="الصفحة الرئيسية">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 10.5 12 3l9 7.5"/>
-    <path d="M5 10v10h14V10"/>
+
+<a href="https://semarysteel.com" class="home-btn" title="الرئيسية">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+    <polyline points="9 22 9 12 15 12 15 22"></polyline>
   </svg>
 </a>
-<div class="card">
-  <img src="assets/img/Logo.png" class="avatar" />
-  <h1>السمري ستيل</h1>
-  <p class="bio">تجارة الحديد والاستانلس — جودة عالية × مصداقية × أسعار منافسة</p>
 
-  <div class="social-list" id="socials"></div>
+<div class="main-container">
+  
+  <aside class="sales-panel">
+    <div class="sales-title">فريق المبيعات</div>
+    <div id="salesContainer" style="display:contents"></div>
+  </aside>
 
-  <div class="meta">
-    <span>تم الزيارة: <b id="visits">0</b></span>
-    <span class="share" id="shareBtn">مشاركة</span>
-  </div>
+  <main class="profile-card">
+    <div class="main-avatar">
+      <img src="assets/img/Logo.png" alt="السمري ستيل Logo" />
+    </div>
+    
+    <h1>السمري ستيل</h1>
+    <p class="bio">نجمع بين صلابة الحديد وجودة الاستانلس ومرونة التعامل. <br> جودة عالية - مصداقية - أسعار منافسة</p>
+
+    <div class="social-grid" id="socialList">
+      </div>
+
+    <div class="footer-meta">
+      <span>👁️ زيارات: <b id="visitCount">0</b></span>
+      <div class="share-btn" id="shareBtn">مشاركة الصفحة</div>
+    </div>
+  </main>
+
 </div>
 
+<footer class="map-footer">
+  <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3449.6786785704494!2d31.227049299999994!3d30.160601399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14586b005b5fdc55%3A0x478f5a56a1b49f18!2z2KfZhNiz2YXYsdmKINmE2KrYrNin2LHZhyDYp9mE2K3Yr9mK2K8g2YjYp9mE2KfYs9iq2KfZhtmE2LM!5e0!3m2!1sar!2seg!4v1760966397459!5m2!1sar!2seg" loading="lazy"></iframe>
+</footer>
+
 <script>
-const socials=[
-  {p:'facebook',t:'Facebook',u:'https://www.facebook.com/Elsemarysteel'},
-  {p:'instagram',t:'Instagram',u:'https://www.instagram.com/elsemarysteel/'},
-  {p:'tiktok',t:'TikTok',u:'https://www.tiktok.com/@elsemary.steel'},
-  {p:'youtube',t:'YouTube',u:'https://www.youtube.com/@Elsemarysteel'}
+// --- 1. إعداد بيانات السوشيال ميديا ---
+const socials = [
+  { id: 'facebook', name: 'Facebook', url: 'https://www.facebook.com/Elsemarysteel' },
+  { id: 'instagram', name: 'Instagram', url: 'https://www.instagram.com/elsemarysteel/' },
+  { id: 'tiktok', name: 'TikTok', url: 'https://www.tiktok.com/@elsemary.steel' },
+  { id: 'youtube', name: 'YouTube', url: 'https://www.youtube.com/@Elsemarysteel' }
 ];
 
-function icon(p){
-  const i={
-    facebook:`<svg viewBox='0 0 24 24'><path fill='currentColor' d='M22 12A10 10 0 1 0 10.5 21.9v-7H8.3v-3h2.2V9.2c0-2.2 1.3-3.4 3.3-3.4.95 0 1.95.17 1.95.17V8h-1.12C13.5 8 13.1 8.7 13.1 9.4V12h2.45l-.39 3h-2.06v7A10 10 0 0 0 22 12z'/></svg>`,
-    instagram:`<svg viewBox='0 0 24 24'><rect x='3' y='3' width='18' height='18' rx='5' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='4' stroke='currentColor' stroke-width='2'/><circle cx='17.5' cy='6.5' r='1.2' fill='currentColor'/></svg>`,
-    tiktok:`<svg viewBox='0 0 24 24'><path fill='currentColor' d='M9 9v6a4 4 0 1 0 4-4V6h3a5 5 0 0 0 5-5v4a7 7 0 0 1-7-7v10a6 6 0 1 1-6 6V9z'/></svg>`,
-    youtube:`<svg viewBox='0 0 24 24'><path fill='currentColor' d='M21.6 7.2s-.2-1.4-.8-2c-.7-.8-1.5-.8-1.9-.9C15.6 4 12 4 12 4h-.1s-3.6 0-6.9.3c-.4 0-1.2.1-1.9.9-.6.6-.8 2-.8 2S2 8.8 2 10.4v1.2c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.7.8 1.6.8 2 1 1.5.1 6.8.3 6.8.3s3.6 0 6.9-.3c.4 0 1.2-.1 1.9-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.2c0-1.6-.2-3.2-.2-3.2zM10 14.7V8.9l5.2 2.9-5.2 2.9z'/></svg>`
-  };
-  return i[p];
-}
+// أيقونات SVG نظيفة
+const icons = {
+  facebook: `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>`,
+  instagram: `<svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`,
+  tiktok: `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.21-.734-4.189-1.83V15c0 3.483-2.618 6-6 6-3.324 0-6-2.517-6-6 0-3.483 2.676-6 6-6 .332 0 .66.025.981.075V11.1c-.312-.05-.629-.075-.981-.075-2.007 0-3.868 1.55-3.868 3.975s1.861 3.975 3.868 3.975c2.007 0 3.868-1.55 3.868-3.975V0z"/></svg>`,
+  youtube: `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33zM9.75 15.02l5.75-3.27-5.75-3.27z"/></svg>`
+};
 
-const list=document.getElementById('socials');
-socials.forEach(s=>{
-  const a=document.createElement('a');
-  a.className='s-btn';
-  a.href=s.u;
-  a.target='_blank';
-  a.innerHTML=icon(s.p)+`<span>${s.t}</span>`;
-  list.appendChild(a);
+const socialList = document.getElementById('socialList');
+socials.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 's-btn';
+  a.setAttribute('data-platform', s.id);
+  a.href = s.url;
+  a.target = '_blank';
+  a.innerHTML = `${icons[s.id]} <span>${s.name}</span>`;
+  socialList.appendChild(a);
 });
 
-let v=Number(localStorage.getItem('sumary_visits')||0)+1;
-localStorage.setItem('sumary_visits',v);
-document.getElementById('visits').textContent=v;
+// --- 2. إعداد فريق المبيعات ---
+const salesTeam = [
+  { name: 'بسام الملك', phone: '01112223344', img: 'bassam.jpg' },
+  { name: 'أحمد رضا', phone: '01223344556', img: 'AReda.jpg' },
+  { name: 'محمد جلهوم', phone: '01334455667', img: 'mgalhoum.jpg' }
+];
 
-document.getElementById('shareBtn').onclick=async()=>{
-  try{
-    if(navigator.share) await navigator.share({title:'السمري ستيل',url:location.href});
-    else{await navigator.clipboard.writeText(location.href);alert('تم النسخ');}
-  }catch{}
+const salesContainer = document.getElementById('salesContainer');
+salesTeam.forEach(person => {
+  const cleanPhone = person.phone.replace(/\D/g, ''); // أرقام فقط للرابط
+  const link = document.createElement('a');
+  link.className = 'sales-item';
+  link.href = `https://wa.me/2${cleanPhone}`; // رابط واتساب مباشر
+  link.target = '_blank';
+  
+  link.innerHTML = `
+    <div class="sales-avatar-wrapper">
+      <img src="${person.img}" alt="${person.name}" class="sales-avatar" onerror="this.src='https://ui-avatars.com/api/?name=${person.name}&background=d4a036&color=fff'">
+      <div class="wa-badge">
+         <svg style="width:14px;height:14px" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </div>
+    </div>
+    <div class="sales-info">
+      <div class="sales-name">${person.name}</div>
+      <div class="sales-phone">${person.phone}</div>
+    </div>
+  `;
+  salesContainer.appendChild(link);
+});
+
+// --- 3. عداد الزيارات والمشاركة ---
+let visits = Number(localStorage.getItem('semary_visits') || 0) + 1;
+localStorage.setItem('semary_visits', visits);
+document.getElementById('visitCount').textContent = visits;
+
+document.getElementById('shareBtn').onclick = async () => {
+  if (navigator.share) {
+    try { await navigator.share({ title: 'السمري ستيل', url: location.href }); } catch(err) {}
+  } else {
+    try { await navigator.clipboard.writeText(location.href); alert('تم نسخ الرابط!'); } catch(err) {}
+  }
 };
 </script>
 
