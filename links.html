@@ -66,24 +66,23 @@ body {
 .main-container {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: center; /* توسيط العناصر */
   align-items: flex-start;
-  padding: 40px 20px 240px; /* Padding bottom for footer space */
-  gap: 40px;
+  padding: 40px 20px;
+  gap: 30px; /* المسافة بين الأعمدة */
   position: relative;
-  max-width: 1400px;
+  max-width: 1600px; /* زيادة العرض لاستيعاب 3 أعمدة */
   margin: 0 auto;
   width: 100%;
 }
 
 /* ------------------------------------------------------------
-   3. Sales Panel (Sidebar)
+   3. Sales Panel (Right Sidebar - RTL)
 ------------------------------------------------------------ */
-/* الكونتينر الجانبي */
 .sales-panel {
   position: sticky;
   top: 40px;
-  width: 90px; /* العرض المصغر */
+  width: 90px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-radius: var(--radius-xl);
@@ -97,11 +96,12 @@ body {
   overflow: hidden;
   z-index: 100;
   height: fit-content;
+  /* منع الانكماش */
+  flex-shrink: 0;
 }
 
-/* عند المرور بالماوس (Expand) */
 .sales-panel:hover {
-  width: 280px; /* توسيع العرض */
+  width: 280px;
   padding: 20px;
 }
 
@@ -112,13 +112,12 @@ body {
   text-align: center;
   margin-bottom: 5px;
   white-space: nowrap;
-  opacity: 0; 
+  opacity: 0;
   transition: 0.2s;
   height: 0; overflow: hidden;
 }
 .sales-panel:hover .sales-title { opacity: 1; height: auto; margin-bottom: 15px; }
 
-/* عنصر المبيعات الواحد */
 .sales-item {
   display: flex;
   align-items: center;
@@ -133,16 +132,12 @@ body {
 
 .sales-item:hover {
   background: var(--gold-light);
-  transform: translateX(-5px); /* حركة بسيطة للداخل */
+  transform: translateX(-5px);
 }
 
-/* الصورة - طلبك: صور كبيرة */
-.sales-avatar-wrapper {
-  position: relative;
-  flex-shrink: 0;
-}
+.sales-avatar-wrapper { position: relative; flex-shrink: 0; }
 .sales-avatar {
-  width: 65px; /* تكبير الصورة */
+  width: 65px;
   height: 65px;
   border-radius: 50%;
   object-fit: cover;
@@ -152,36 +147,26 @@ body {
 }
 .sales-item:hover .sales-avatar { transform: scale(1.05); border-color: var(--gold); }
 
-/* أيقونة واتساب صغيرة فوق الصورة */
 .wa-badge {
-  position: absolute;
-  bottom: 0; right: 0;
-  width: 22px; height: 22px;
-  background: #25D366;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-size: 12px;
+  position: absolute; bottom: 0; right: 0; width: 22px; height: 22px;
+  background: #25D366; border-radius: 50%; border: 2px solid #fff;
+  display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px;
 }
 
-/* النصوص (مخفية في الوضع المصغر) */
 .sales-info {
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transition: opacity 0.2s 0.1s; /* تأخير بسيط */
-  white-space: nowrap;
+  display: flex; flex-direction: column; opacity: 0; transition: opacity 0.2s 0.1s; white-space: nowrap;
 }
 .sales-panel:hover .sales-info { opacity: 1; }
-
 .sales-name { font-weight: 700; color: var(--text-main); font-size: 16px; margin-bottom: 2px; }
 .sales-phone { font-size: 13px; color: var(--text-muted); font-family: sans-serif; dir: ltr; }
 
 /* ------------------------------------------------------------
-   4. The Main Card
+   4. The Main Card (Center)
 ------------------------------------------------------------ */
 .profile-card {
-  flex: 0 1 700px;
+  flex: 1; /* يأخذ المساحة المتاحة */
+  max-width: 700px; /* أقصى عرض */
+  min-width: 320px;
   background: var(--white);
   border-radius: var(--radius-xl);
   padding: 60px 40px;
@@ -191,168 +176,122 @@ body {
   border: 1px solid rgba(0,0,0,0.02);
 }
 
-/* خلفية جمالية علوية */
 .profile-card::before {
   content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 180px;
+  position: absolute; top: 0; left: 0; right: 0; height: 180px;
   background: linear-gradient(180deg, rgba(212,160,54,0.1) 0%, transparent 100%);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  pointer-events: none;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0; pointer-events: none;
 }
 
 .main-avatar {
-  width: 160px;
-  height: 160px;
-  background: var(--white);
-  border-radius: 50%;
-  padding: 10px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-  margin: 0 auto 25px;
-  position: relative;
-  z-index: 2;
+  width: 160px; height: 160px; background: var(--white); border-radius: 50%; padding: 10px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin: 0 auto 25px; position: relative; z-index: 2;
 }
 .main-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: contain; }
 
 h1 { margin: 0 0 10px; font-size: 32px; font-weight: 900; color: var(--text-main); letter-spacing: -0.5px; }
 .bio { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; line-height: 1.6; max-width: 80%; margin-left: auto; margin-right: auto; }
 
-/* قائمة السوشيال */
-.social-grid {
-  display: grid;
-  gap: 15px;
-  margin-bottom: 40px;
-}
+.social-grid { display: grid; gap: 15px; margin-bottom: 40px; }
 
 .s-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 18px;
-  background: var(--white);
-  border: 2px solid #f0f0f0;
-  border-radius: 20px;
-  font-size: 18px;
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--text-main);
-  transition: var(--anim);
-  position: relative;
-  overflow: hidden;
+  display: flex; align-items: center; justify-content: center; gap: 12px; padding: 18px;
+  background: var(--white); border: 2px solid #f0f0f0; border-radius: 20px; font-size: 18px;
+  font-weight: 700; text-decoration: none; color: var(--text-main); transition: var(--anim);
+  position: relative; overflow: hidden;
 }
-
 .s-btn svg { width: 28px; height: 28px; transition: var(--anim); }
-
-/* ألوان خاصة عند الهوفر */
 .s-btn:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 160, 54, 0.15); }
 .s-btn[data-platform="facebook"]:hover svg { color: #1877F2; }
 .s-btn[data-platform="instagram"]:hover svg { color: #E4405F; }
 .s-btn[data-platform="tiktok"]:hover svg { color: #000000; }
 .s-btn[data-platform="youtube"]:hover svg { color: #FF0000; }
 
-.footer-meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  font-size: 15px;
-  color: #888;
-  margin-top: 30px;
-}
-.share-btn {
-  background: var(--gold-light);
-  color: var(--gold-dark);
-  padding: 8px 20px;
-  border-radius: 30px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--anim);
-}
+.footer-meta { display: flex; align-items: center; justify-content: center; gap: 20px; font-size: 15px; color: #888; margin-top: 30px; }
+.share-btn { background: var(--gold-light); color: var(--gold-dark); padding: 8px 20px; border-radius: 30px; font-weight: 700; cursor: pointer; transition: var(--anim); }
 .share-btn:hover { background: var(--gold); color: #fff; }
 
 /* ------------------------------------------------------------
-   5. Sticky Map Footer
+   5. Map Side Panel (Left Sidebar - RTL) -- جديد
 ------------------------------------------------------------ */
-.map-footer {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 129px;
+.map-side-panel {
+  position: sticky;
+  top: 40px;
+  width: 300px; /* عرض ثابت */
+  height: calc(100vh - 80px); /* طول كامل الشاشة ناقص الهوامش */
   background: #fff;
-  border-top: 4px solid var(--gold);
-  z-index: 999;
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(212, 160, 54, 0.1);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
 }
-.map-frame { width: 100%; height: 100%; border: none; }
+
+.map-title {
+  padding: 15px;
+  text-align: center;
+  background: var(--gold-light);
+  color: var(--gold-dark);
+  font-weight: 700;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.map-frame { width: 100%; flex: 1; border: none; }
 
 /* ------------------------------------------------------------
    6. RESPONSIVE DESIGN (تجاوب الموبايل)
 ------------------------------------------------------------ */
+@media (max-width: 1200px) {
+  /* للشاشات المتوسطة: الخريطة تنزل تحت */
+  .main-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .map-side-panel {
+    width: 100%;
+    max-width: 700px;
+    height: 350px;
+    position: relative;
+    top: 0;
+    order: 3; /* ترتيبها الثالث (تحت) */
+  }
+}
+
 @media (max-width: 992px) {
   .main-container {
     flex-direction: column;
-    padding: 20px 15px 200px;
+    padding: 20px 15px;
     align-items: center;
     gap: 25px;
   }
-  
-  /* تحويل قائمة المبيعات لشريط أفقي بالأعلى */
+ 
+  /* المبيعات في الأعلى */
   .sales-panel {
-    position: relative;
-    top: 0;
-    width: 100%;
-    max-width: 700px;
-    height: auto;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 15px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    /* إخفاء شريط التمرير */
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
-    border-bottom: 2px solid var(--gold-light);
-    background: #fff;
+    position: relative; top: 0; width: 100%; max-width: 700px; height: auto;
+    flex-direction: row; overflow-x: auto; padding: 15px; align-items: flex-start; justify-content: flex-start;
+    scrollbar-width: none; -ms-overflow-style: none; border-bottom: 2px solid var(--gold-light); background: #fff;
   }
   .sales-panel::-webkit-scrollbar { display: none; }
-  
-  .sales-panel:hover { width: 100%; padding: 15px; } /* إلغاء توسيع العرض للموبايل */
-  .sales-title { display: none; } /* إخفاء العنوان لتوفير مساحة */
-  
-  .sales-item {
-    flex-direction: column; /* الصورة فوق الاسم */
-    min-width: 100px;
-    text-align: center;
-    padding: 5px;
-    gap: 8px;
-  }
-  .sales-item:hover { transform: translateY(-3px); }
-  
-  .sales-avatar { width: 75px; height: 75px; } /* صور كبيرة جداً وواضحة للموبايل */
-  
-  .sales-info {
-    opacity: 1; /* إظهار الاسم دائماً على الموبايل */
-    align-items: center;
-  }
+  .sales-panel:hover { width: 100%; padding: 15px; }
+  .sales-title { display: none; }
+  .sales-item { flex-direction: column; min-width: 100px; text-align: center; padding: 5px; gap: 8px; }
+  .sales-avatar { width: 75px; height: 75px; }
+  .sales-info { opacity: 1; align-items: center; }
   .sales-name { font-size: 14px; white-space: normal; line-height: 1.2; }
   .sales-phone { font-size: 11px; }
 
   /* الكارت الرئيسي */
-  .profile-card {
-    width: 100%;
-    padding: 40px 20px;
-  }
+  .profile-card { width: 100%; padding: 40px 20px; }
   h1 { font-size: 26px; }
-  .bio { width: 100%; font-size: 16px; margin-bottom: 30px; }
-  .s-btn { padding: 15px; font-size: 16px; }
-}
-
-@media (max-width: 480px) {
-  /* تعديلات للشاشات الصغيرة جداً */
-  .sales-avatar { width: 68px; height: 68px; }
-  .map-footer { height: 160px; }
-  body { padding-bottom: 160px; } /* التأكد من أن الخريطة لا تغطي المحتوى */
+  
+  /* الخريطة في الموبايل */
+  .map-side-panel {
+    width: 100%;
+    height: 300px;
+    border-radius: var(--radius-md);
+  }
 }
 </style>
 </head>
@@ -367,7 +306,7 @@ h1 { margin: 0 0 10px; font-size: 32px; font-weight: 900; color: var(--text-main
 </a>
 
 <div class="main-container">
-  
+ 
   <aside class="sales-panel">
     <div class="sales-title">فريق المبيعات</div>
     <div id="salesContainer" style="display:contents"></div>
@@ -377,7 +316,7 @@ h1 { margin: 0 0 10px; font-size: 32px; font-weight: 900; color: var(--text-main
     <div class="main-avatar">
       <img src="assets/img/Logo.png" alt="السمري ستيل Logo" />
     </div>
-    
+   
     <h1>السمري ستيل</h1>
     <p class="bio">نجمع بين صلابة الحديد وجودة الاستانلس ومرونة التعامل. <br> جودة عالية - مصداقية - أسعار منافسة</p>
 
@@ -390,11 +329,12 @@ h1 { margin: 0 0 10px; font-size: 32px; font-weight: 900; color: var(--text-main
     </div>
   </main>
 
-</div>
+  <aside class="map-side-panel">
+    <div class="map-title">موقعنا على الخريطة</div>
+    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3449.6786785704494!2d31.227049299999994!3d30.160601399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14586b005b5fdc55%3A0x478f5a56a1b49f18!2z2KfZhNiz2YXYsdmKINmE2KrYrNin2LHZhyDYp9mE2K3Yr9mK2K8g2YjYp9mE2KfYs9iq2KfZhtmE2LM!5e0!3m2!1sar!2seg!4v1760966397459!5m2!1sar!2seg" loading="lazy"></iframe>
+  </aside>
 
-<footer class="map-footer">
-  <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3449.6786785704494!2d31.227049299999994!3d30.160601399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14586b005b5fdc55%3A0x478f5a56a1b49f18!2z2KfZhNiz2YXYsdmKINmE2KrYrNin2LHZhyDYp9mE2K3Yr9mK2K8g2YjYp9mE2KfYs9iq2KfZhtmE2LM!5e0!3m2!1sar!2seg!4v1760966397459!5m2!1sar!2seg" loading="lazy"></iframe>
-</footer>
+</div>
 
 <script>
 // --- 1. إعداد بيانات السوشيال ميديا ---
@@ -405,7 +345,6 @@ const socials = [
   { id: 'youtube', name: 'YouTube', url: 'https://www.youtube.com/@Elsemarysteel' }
 ];
 
-// أيقونات SVG نظيفة
 const icons = {
   facebook: `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>`,
   instagram: `<svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`,
@@ -433,12 +372,12 @@ const salesTeam = [
 
 const salesContainer = document.getElementById('salesContainer');
 salesTeam.forEach(person => {
-  const cleanPhone = person.phone.replace(/\D/g, ''); // أرقام فقط للرابط
+  const cleanPhone = person.phone.replace(/\D/g, ''); 
   const link = document.createElement('a');
   link.className = 'sales-item';
-  link.href = `https://wa.me/2${cleanPhone}`; // رابط واتساب مباشر
+  link.href = `https://wa.me/2${cleanPhone}`;
   link.target = '_blank';
-  
+ 
   link.innerHTML = `
     <div class="sales-avatar-wrapper">
       <img src="${person.img}" alt="${person.name}" class="sales-avatar" onerror="this.src='https://ui-avatars.com/api/?name=${person.name}&background=d4a036&color=fff'">
