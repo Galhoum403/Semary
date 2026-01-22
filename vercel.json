@@ -11,18 +11,5 @@
       ]
     }
   ],
-  "redirects": [
-    {
-      "source": "/assets/img(.*)",
-      "has": [
-        {
-          "type": "header",
-          "key": "referer",
-          "value": "^(?!https://semarysteel.com).*"
-        }
-      ],
-      "destination": "/no-access.jpg",
-      "permanent": false
-    }
-  ]
+  
 }
